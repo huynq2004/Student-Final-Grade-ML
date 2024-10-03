@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 
 
 # Đọc dữ liệu từ file CSV
-data = pd.read_csv('Student-Final-Grade-ML/data/raw/grade-records_raw2.csv')
+data = pd.read_csv('Student-Final-Grade-ML/data/processed/grade-records_processed.csv')
 
 # Chuẩn bị biến đầu vào (X) và đầu ra (y)
 X = data[['cw1', 'mid-term', 'cw2']]  # Chọn các biến đầu vào
@@ -35,12 +35,12 @@ print(y_test.head())
 # Lưu tập huấn luyện
 train_data = pd.DataFrame(X_train)
 train_data['final'] = y_train  # Thêm biến đầu ra vào tập huấn luyện
-train_data.to_csv('train_data.csv', index=False)
+train_data.to_csv('Student-Final-Grade-ML/data/split/train_data.csv', index=False)
 
 # Lưu tập kiểm tra
 test_data = pd.DataFrame(X_test)
 test_data['final'] = y_test  # Thêm biến đầu ra vào tập kiểm tra
-test_data.to_csv('test_data.csv', index=False)
+test_data.to_csv('Student-Final-Grade-ML/data/split/test_data.csv', index=False)
 
 print("Train and test datasets saved as 'train_data.csv' and 'test_data.csv'.")
 
@@ -61,7 +61,7 @@ for fold, (train_index, val_index) in enumerate(kf.split(X_train)):
     fold_val_data['final'] = y_fold_val.reset_index(drop=True)  # Thêm biến đầu ra
 
     # Lưu vào tệp CSV
-    fold_train_data.to_csv(f'fold_{fold}_train.csv', index=False)
-    fold_val_data.to_csv(f'fold_{fold}_val.csv', index=False)
+    fold_train_data.to_csv(f'Student-Final-Grade-ML/data/split/K-folds/fold_{fold}_train.csv', index=False)
+    fold_val_data.to_csv(f'Student-Final-Grade-ML/data/split/K-folds/fold_{fold}_val.csv', index=False)
 
     print(f'Saved fold {fold} train and validation data to CSV files.')
