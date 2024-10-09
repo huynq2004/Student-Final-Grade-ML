@@ -5,7 +5,7 @@ import ridge_utils as utils
 import ridge_plots as plot
 
 # 1. Thiết lập các giá trị λ cần kiểm tra
-lamda_values = [0.01, 0.1, 1, 5, 10, 50, 100, 1000, 10000]
+lamda_values = np.logspace(-2, 1, num=100)
 
 # 2. Huấn luyện mô hình và tìm giá trị λ tối ưu
 best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_values)
@@ -13,6 +13,7 @@ best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_v
 print(f'Giá trị λ tối ưu: {best_lamda}')
 
 # 3. Lưu trữ mô hình với λ tốt nhất
+
 # Sử dụng numpy để lưu trọng số vào file
 X_train, y_train = utils.load_data_from('data/split/train_data.csv')
 w = model.ridge_regression(X_train, y_train, best_lamda)
