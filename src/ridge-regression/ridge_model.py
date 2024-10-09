@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+import ridge_utils as utils
 
 # Hàm thuật toán
 def ridge_regression(X, y, lamda):
@@ -19,28 +21,24 @@ def ridge_regression(X, y, lamda):
     return w
 
 # Hàm huấn luyện
-def train_on_folds(X_folds, y_folds, lamda_values):
+# Hàm huấn luyện Ridge Regression trên từng fold
+def train_on_folds(fold_count, lamda_values):
     """
-    Huấn luyện mô hình Ridge Regression trên từng fold.
-    X_folds: List các tập train của từng fold.
-    y_folds: List các tập nhãn train của từng fold.
-    lamda_values: Danh sách các giá trị λ cần kiểm tra.
+    Huấn luyện mô hình Ridge Regression trên từng fold từ các file CSV.
+    fold_count: Số lượng fold (5 folds).
+    lamda_values: Danh sách các giá trị lamda cần kiểm tra.
     """
     best_lamda = None
     lowest_error = float('inf')
-
+    avg_errors = []  # Danh sách lưu trữ lỗi trung bình cho mỗi λ
+    
     for lamda in lamda_values:
         fold_errors = []
 
         # Huấn luyện và đánh giá trên từng fold
-        for i in range(len(X_folds)):
-            # Chọn tập val
-            X_val = X_folds[i]
-            y_val = y_folds[i]
-
-            # Chọn các fold còn lại làm train_set
-            X_train = np.concatenate([X_folds[j] for j in range(len(X_folds)) if j != i])
-            y_train = np.concatenate([y_folds[j] for j in range(len(y_folds)) if j != i])
+        for i in range(fold_count):
+            # Đọc dữ liệu cho fold thứ i
+            X_train, y_train, X_val, y_val = utils.load_fold_data(i)
 
             # Huấn luyện mô hình Ridge Regression
             w = ridge_regression(X_train, y_train, lamda)
@@ -48,17 +46,22 @@ def train_on_folds(X_folds, y_folds, lamda_values):
             # Dự đoán trên tập val
             y_pred = np.dot(np.concatenate((np.ones((X_val.shape[0], 1)), X_val), axis=1), w)
 
-            # Tính lỗi
+            # Tính lỗi (Mean Squared Error)
             error = np.mean((y_val - y_pred) ** 2)
             fold_errors.append(error)
 
+
         # Tính lỗi trung bình qua các fold
         avg_error = np.mean(fold_errors)
+        avg_errors.append(avg_error)  # Lưu lỗi trung bình vào danh sách
+        
         if avg_error < lowest_error:
             lowest_error = avg_error
             best_lamda = lamda
 
-    return best_lamda
+        print(f"Lambda = {lamda}, Average Fold Error = {avg_error}")
+
+    return best_lamda, avg_errors
 
 def predict(X, w):
     """
