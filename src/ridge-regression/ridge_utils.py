@@ -19,5 +19,5 @@ def load_fold_data(fold_number):
 def load_data_from(path):
     input = pd.read_csv(f'{path}')
     data = input[['cw1', 'mid-term', 'cw2']].values
-    
-    return data
+    label = input[['final']].values
+    return data, label
