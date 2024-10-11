@@ -3,7 +3,7 @@ import pandas as pd
 import ridge_utils as utils
 
 # Hàm thuật toán
-def ridge_regression(X, y, lamda):#y là nhãn, x là cột thuôc tính
+def ridge_regression(X, y, lamda):
     """
     X: Ma trận thuộc tính  (các cột cw1, mid-term, cw2).
     y: nhãn (cột final).
@@ -33,7 +33,7 @@ def train_on_folds(fold_count, lamda_values):
     avg_errors = []  # Danh sách lưu trữ lỗi trung bình cho mỗi λ
     
     for lamda in lamda_values:
-        fold_errors = []#lưu gt của landa1 trên 5 fold
+        fold_errors = []
 
         # Huấn luyện và đánh giá trên từng fold
         for i in range(fold_count):
@@ -64,7 +64,6 @@ def train_on_folds(fold_count, lamda_values):
     return best_lamda, avg_errors
 
 def predict(X, w):
-    #x: dl đầu vào, ko có nhãn; w là cái trọng số mình lấy đc khi huấn luyện, nó chính là mqh giữa data vs nhãn
     """
     Dự đoán đầu ra từ X với trọng số w.
     """
