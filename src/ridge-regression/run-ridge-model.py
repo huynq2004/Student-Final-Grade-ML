@@ -1,4 +1,3 @@
-# run_ridge_model.py
 import numpy as np
 import ridge_model as model
 import ridge_utils as utils
@@ -30,7 +29,7 @@ y_pred = model.predict(X_test, weights)
 
 # 5. Tính lỗi và vẽ biểu đồ
 mse_test = np.mean((y_test - y_pred) ** 2)
-print(f'Lỗi trung bình trên tập test: {mse_test}')
+print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 
 # Vẽ biểu đồ lỗi theo các giá trị λ
 plot.plot_errors(lamda_values, avg_errors)
