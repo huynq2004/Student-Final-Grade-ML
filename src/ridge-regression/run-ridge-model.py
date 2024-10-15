@@ -33,3 +33,6 @@ print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 
 # Vẽ biểu đồ lỗi theo các giá trị λ
 plot.plot_errors(lamda_values, avg_errors)
+
+# Vẽ biểu đồ so sánh điểm final dự đoán và thực tế trên tập test
+plot.plot_final_scores_comparison('data/split/test_data.csv', 'ridge_model_weights.npy')
