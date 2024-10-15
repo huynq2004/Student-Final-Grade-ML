@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 def plot_errors(lamda_values, errors):
     plt.plot(lamda_values, errors)
     plt.xlabel('Giá trị λ')
