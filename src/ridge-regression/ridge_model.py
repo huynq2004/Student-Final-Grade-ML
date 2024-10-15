@@ -3,6 +3,7 @@ import pandas as pd
 import ridge_utils as utils
 from sklearn.linear_model import Ridge
 
+
 # Hàm thuật toán
 def ridge_regression(X, y, lamda):
     """
@@ -90,7 +91,7 @@ def train_on_folds_with_sklearn(fold_count, lamda_values):
             y_pred = ridge_model.predict(X_val)
 
             # Tính lỗi (Mean Squared Error) cho fold này
-            error = mean_squared_error(y_val, y_pred)
+            error = np.mean((y_val - y_pred) ** 2)
             fold_errors.append(error)
 
         # Tính lỗi trung bình qua các fold
