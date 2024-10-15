@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import ridge_utils as utils
+from sklearn.linear_model import Ridge
 
 # Hàm thuật toán
 def ridge_regression(X, y, lamda):
