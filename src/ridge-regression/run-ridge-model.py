@@ -35,4 +35,4 @@ print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 plot.plot_errors(lamda_values, avg_errors)
 
 # Vẽ biểu đồ so sánh điểm final dự đoán và thực tế trên tập test
-plot.plot_final_scores_comparison(X_test, y_test,weights)
+plot.plot_final_scores_comparison(X_test, y_test, y_pred)

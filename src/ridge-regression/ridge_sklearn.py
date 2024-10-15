@@ -19,8 +19,8 @@ X_test, y_test = utils.load_data_from('data/split/test_data.csv')
 ridge_model = Ridge(alpha=best_lamda_sklearn, fit_intercept=True)
 ridge_model.fit(X_train, y_train)
 
-print("Hệ số chặn (intercept_) = " + ridge_model.intercept_)
-print("Hệ số hồi quy (coef_) = " + ridge_model.coef_)
+print("Hệ số chặn (intercept_) = ", ridge_model.intercept_)
+print("Hệ số hồi quy (coef_) = ", ridge_model.coef_)
 
 w_sklearn = np.concatenate((ridge_model.intercept_, ridge_model.coef_.flatten()))
 print('Trọng số w (sklearn) = ', w_sklearn)
