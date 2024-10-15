@@ -10,24 +10,28 @@ def plot_errors(lamda_values, errors):
     plt.title('Lỗi theo các giá trị λ')
     plt.show()
 
-#   Biểu đồ phân tán so sánh final real vs final pridict trên test  #
-def plot_final_scores_comparison(test_data_path, weights_path):
-    X_test, y_test = utils.load_data_from(test_data_path)    # Tải dữ liệu test
-    weights = np.load(weights_path)     # Tải trọng số từ file
-    y_pred = model.predict(X_test, weights)    # Dự đoán điểm final
-    # Vẽ biểu đồ
-    plt.figure(figsize=(10, 10))
+def plot_final_scores_comparison(X_test, y_test, y_pred):
+    # Vẽ biểu đồ phân tán
+    plt.figure(figsize=(6, 6))  # Điều chỉnh kích thước biểu đồ (bé hơn)
+
     plt.scatter(y_test, y_pred, color='blue', label='Dự đoán', alpha=0.7)
+    
     # Vẽ đường thẳng y = x để so sánh
     x = np.linspace(0, 10, 100)
     plt.plot(x, x, color='red', linestyle='--', label='Giá trị thực')
+
+    # Giới hạn trục từ 0 đến 10
     plt.xlim(0, 10)
     plt.ylim(0, 10)
-    plt.xlabel('Giá trị thực của final')
-    plt.ylabel('Giá trị dự đoán của final')
-    plt.title('So sánh điểm final dự đoán và thực tế trên tập test')
+
+    # Thêm các thông số của biểu đồ
+    plt.xlabel('Giá trị nhãn thực tế')
+    plt.ylabel('Giá trị nhãn dự đoán ')
+    plt.title('So sánh nhãn thực tế và nhãn lý thuyết')
     plt.axhline(0, color='black', linewidth=0.5, ls='--')
     plt.axvline(0, color='black', linewidth=0.5, ls='--')
-    plt.grid()
+    plt.grid(True)
     plt.legend()
+    
+    # Hiển thị biểu đồ
     plt.show()
