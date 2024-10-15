@@ -1,4 +1,3 @@
-# run_ridge_model.py
 import numpy as np
 import ridge_model as model
 import ridge_utils as utils
@@ -8,9 +7,9 @@ import ridge_plots as plot
 lamda_values = np.logspace(-2, 1, num=100)
 
 # 2. Huấn luyện mô hình và tìm giá trị λ tối ưu
-best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_values)#lưu 2 cái gt này
+best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_values)
 
-print(f'GT lamda best: {best_lamda}')
+print(f'Giá trị λ tối ưu: {best_lamda}')
 
 # 3. Lưu trữ mô hình với λ tốt nhất
 
@@ -22,14 +21,15 @@ np.save('ridge_model_weights.npy', w)
 
 # 4. Dự đoán trên tập test
 # Đọc dữ liệu test
-X_test, y_test = utils.load_data_from('D:/Project_ML/Student-Final-Grade-ML/data/split/test_data.csv')
+X_test, y_test = utils.load_data_from('data/split/test_data.csv')
+
 # Dự đoán
-weights = np.load('ridge_model_weights.npy')  # Tải trọng số từ file, gọi hàm thôi
+weights = np.load('ridge_model_weights.npy')  # Tải trọng số từ file
 y_pred = model.predict(X_test, weights)
 
 # 5. Tính lỗi và vẽ biểu đồ
 mse_test = np.mean((y_test - y_pred) ** 2)
-print(f'Error mean test: {mse_test}')
+print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 
 # Vẽ biểu đồ lỗi theo các giá trị λ
 plot.plot_errors(lamda_values, avg_errors)
