@@ -11,9 +11,7 @@ def plot_errors(lamda_values, errors):
     plt.show()
 
 #   Biểu đồ phân tán so sánh final real vs final pridict trên test  #
-def plot_final_scores_comparison(test_data_path, weights_path):
-    X_test, y_test = utils.load_data_from(test_data_path)    # Tải dữ liệu test
-    weights = np.load(weights_path)     # Tải trọng số từ file
+def plot_final_scores_comparison(X_test, y_test, weights):
     y_pred = model.predict(X_test, weights)    # Dự đoán điểm final
     # Vẽ biểu đồ
     plt.figure(figsize=(10, 10))
