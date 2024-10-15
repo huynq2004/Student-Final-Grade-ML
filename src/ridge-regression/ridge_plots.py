@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+import numpy as np
+import ridge_utils as utils
+import ridge_model as model
 
 def plot_errors(lamda_values, errors):
     plt.plot(lamda_values, errors)
@@ -6,7 +9,6 @@ def plot_errors(lamda_values, errors):
     plt.ylabel('Lỗi trung bình')
     plt.title('Lỗi theo các giá trị λ')
     plt.show()
-
 
 def plot_final_scores_comparison(X_test, y_test, y_pred):
     # Vẽ biểu đồ phân tán
