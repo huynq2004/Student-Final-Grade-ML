@@ -16,7 +16,7 @@ print(f'Giá trị λ tối ưu (thủ công): {best_lamda}')
 # Sử dụng numpy để lưu trọng số vào file
 X_train, y_train = utils.load_data_from('data/split/train_data.csv')
 w = model.ridge_regression(X_train, y_train, best_lamda)
-print('Trọng số w = ', w)
+print('w = ', w)
 np.save('ridge_model_weights.npy', w)
 
 # 4. Dự đoán trên tập test
@@ -35,4 +35,4 @@ print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 plot.plot_errors(lamda_values, avg_errors)
 
 # Vẽ biểu đồ so sánh điểm final dự đoán và thực tế trên tập test
-plot.plot_final_scores_comparison('data/split/test_data.csv', 'ridge_model_weights.npy')
+plot.plot_final_scores_comparison(X_test, y_test, y_pred)
