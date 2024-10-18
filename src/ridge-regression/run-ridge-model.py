@@ -9,7 +9,7 @@ lamda_values = np.logspace(-2, 1, num=100)
 # 2. Huấn luyện mô hình và tìm giá trị λ tối ưu
 best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_values)
 
-print(f'Giá trị λ tối ưu: {best_lamda}')
+print(f'Giá trị λ tối ưu (thủ công): {best_lamda}')
 
 # 3. Lưu trữ mô hình với λ tốt nhất
 
