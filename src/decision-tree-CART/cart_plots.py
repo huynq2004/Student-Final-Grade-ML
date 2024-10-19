@@ -1,6 +1,19 @@
 from graphviz import Digraph
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn import tree
+
+def plot_decision_tree(model, feature_names=None):
+    """
+    Vẽ cây quyết định sau khi huấn luyện.
+    
+    Parameters:
+    - model: Mô hình DecisionTreeRegressor đã huấn luyện.
+    - feature_names: Danh sách tên các đặc trưng (nếu có).
+    """
+    plt.figure(figsize=(20, 10))  # Thiết lập kích thước đồ thị
+    tree.plot_tree(model, feature_names=feature_names, filled=True, rounded=True, fontsize=10)
+    plt.show()
 
 def plot_tree(tree, feature_names=None):
     """
@@ -49,7 +62,7 @@ def plot_tree(tree, feature_names=None):
 
     # Bắt đầu vẽ từ gốc
     graph = recurse(tree, parent_name='0')
-    graph.render("decision_tree", format="png", cleanup=True)  # Lưu ảnh cây dưới dạng PNG
+    graph.render("decision_tree", "results/plots/decision-tree-CART" ,format="png", cleanup=True)  # Lưu ảnh cây dưới dạng PNG
     print("Cây quyết định đã được lưu thành file decision_tree.png")
 
 def plot_errors(depths, errors):
@@ -58,3 +71,5 @@ def plot_errors(depths, errors):
     plt.ylabel('Mean Squared Error')
     plt.title('Error by Tree Depth')
     plt.show()
+
+
