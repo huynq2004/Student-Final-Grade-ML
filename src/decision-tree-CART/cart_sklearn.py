@@ -1,5 +1,5 @@
 import numpy as np
-import cart_model as model
+from sklearn.tree import DecisionTreeRegressor
 import cart_utils as utils
 import cart_plots as plot
 
@@ -16,8 +16,8 @@ for depth in depth_values:
     for fold in range(10):
         X_train, y_train, X_val, y_val = utils.load_fold_data(fold)
         
-        # Khởi tạo và huấn luyện Decision Tree
-        tree = model.DecisionTree(max_depth=depth)
+        # Khởi tạo và huấn luyện Decision Tree bằng thư viện scikit-learn
+        tree = DecisionTreeRegressor(max_depth=depth)
         tree.fit(X_train, y_train)
         
         # Dự đoán trên tập val
@@ -37,20 +37,17 @@ for depth in depth_values:
     print(f"Depth = {depth}, Average Fold Error = {avg_error}")
 
 # 3. Lưu trữ mô hình với độ sâu tốt nhất
-print(f'Độ sâu tối ưu (thủ công): {best_depth}')
-
-#huấn luện trn toàn booj tập train
-X_train , y_train = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/K-folds2/fold_8_train.csv')
+print(f'Độ sâu tối ưu (sklearn): {best_depth}')
 
 # 4. Dự đoán trên tập test
 X_test, y_test = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/test_data.csv')
-tree = model.DecisionTree(max_depth=best_depth)
+tree = DecisionTreeRegressor(max_depth=best_depth)
 tree.fit(X_train, y_train)
 y_pred = tree.predict(X_test)
 
 # 5. Tính lỗi và vẽ biểu đồ
 mse_test = np.mean((y_test - y_pred) ** 2)
-print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
+print(f'Lỗi trung bình trên tập test (sklearn): {mse_test}')
 
 # Vẽ biểu đồ lỗi theo độ sâu
 plot.plot_errors(depth_values, errors)
