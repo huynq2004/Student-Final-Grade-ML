@@ -62,3 +62,6 @@ print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 
 # Vẽ biểu đồ lỗi theo độ sâu
 plot.plot_errors(depth_values[:len(errors)], errors)
+
+# Vẽ cây kết quả
+plot.plot_tree(tree.tree, feature_names=['cw1', 'mid-term', 'cw2'])
