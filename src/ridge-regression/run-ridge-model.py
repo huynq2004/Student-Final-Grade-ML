@@ -29,7 +29,17 @@ y_pred = model.predict(X_test, weights)
 
 # 5. Tính lỗi và vẽ biểu đồ
 mse_test = np.mean((y_test - y_pred) ** 2)
-print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
+print(f'Lỗi trung bình mse trên tập test (thủ công): {mse_test}')
+
+# Đặt ngưỡng sai số cho accuracy
+error_threshold = 0.5  # Ngưỡng sai số chấp nhận được
+
+# Tính accuracy
+correct_predictions = np.sum(np.abs(y_test - y_pred) < error_threshold)
+accuracy = (correct_predictions / len(y_test) ) * 100
+
+print(f'Accuracy (ngưỡng {error_threshold}): {accuracy:.2f}%')
+
 
 # Vẽ biểu đồ lỗi theo các giá trị λ
 plot.plot_errors(lamda_values, avg_errors)
