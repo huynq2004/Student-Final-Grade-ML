@@ -72,4 +72,19 @@ def plot_errors(depths, errors):
     plt.title('Lỗi theo các giá trị độ sâu')
     plt.show()
 
-
+#hàm vẽ biểu đồ so sánh nhãn thực tế vs nhãn dự đoán của thuật toán thủ công
+def plot_predictions(y_true, y_pred):
+    y_true = np.asarray(y_true).flatten()
+    y_pred = np.asarray(y_pred).flatten()
+    plt.figure(figsize=(12, 6))
+    indices = np.arange(len(y_true)) 
+    plt.bar(indices - 0.2, y_true, width=0.4, label='Kết quả thật', color='blue', alpha=0.6, align='center')
+    plt.bar(indices + 0.2, y_pred, width=0.4, label='Kết quả dự đoán', color='red', alpha=0.6, align='center')
+    plt.axhline(y=np.mean(y_true), color='green', linestyle='--', label='Giá trị trung bình thực tế')
+    plt.xlabel('Chỉ số mẫu')
+    plt.ylabel('Điểm thi Final')
+    plt.title('So sánh Kết quả Dự đoán và Kết quả Thực tế')
+    plt.xticks(indices)  # Đặt nhãn cho trục X
+    plt.legend()
+    plt.tight_layout()
+    plt.show()

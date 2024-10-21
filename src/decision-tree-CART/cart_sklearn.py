@@ -74,3 +74,6 @@ plot.plot_errors(depth_values[:len(errors)], errors)
 
 # Vẽ cây kết quả
 plot.plot_decision_tree(tree, feature_names=['cw1', 'mid-term', 'cw2'])  # Tên các đặc trưng có thể thay đổi
+
+# Vẽ biểu đồ so sánh kết quả dự đoán với kết quả thật
+plot.plot_predictions(y_test, y_pred)
