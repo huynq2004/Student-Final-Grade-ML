@@ -2,6 +2,7 @@ import numpy as np
 import ridge_model as model
 import ridge_utils as utils
 from sklearn.linear_model import Ridge
+import ridge_plots as plot
 
 # 1. Thiết lập các giá trị λ cần kiểm tra
 lamda_values = np.logspace(-2, 1, num=100)
@@ -11,9 +12,11 @@ best_lamda_sklearn, avg_errors_sklearn = model.train_on_folds_with_sklearn(fold_
 
 print(f'Giá trị λ tốt nhất (sklearn): {best_lamda_sklearn}')
 
+# Lưu giá trị λ tối ưu vào tệp
+np.save('best_lambda_sklearn.npy', best_lamda_sklearn)
 
-X_train, y_train = utils.load_data_from('data/split/train_data.csv')
-X_test, y_test = utils.load_data_from('data/split/test_data.csv')
+X_train, y_train = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/train_data.csv')
+X_test, y_test = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/test_data.csv')
 
 # 6. Sử dụng Ridge Regression từ scikit-learn
 ridge_model = Ridge(alpha=best_lamda_sklearn, fit_intercept=True)
@@ -29,8 +32,4 @@ y_pred_sklearn = ridge_model.predict(X_test)
 mse_test_sklearn = np.mean((y_test - y_pred_sklearn) ** 2)
 print(f'Lỗi trung bình trên tập test (sklearn): {mse_test_sklearn}')
 
-
-
-
-
-
+plot.plot_errors(lamda_values, avg_errors_sklearn)
