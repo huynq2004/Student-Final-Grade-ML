@@ -60,6 +60,15 @@ y_pred = tree.predict(X_test)
 mse_test = np.mean((y_test - y_pred) ** 2)
 print(f'Lỗi trung bình trên tập test (sklearn): {mse_test}')
 
+# Đặt ngưỡng sai số cho accuracy
+error_threshold = 0.5  # Ngưỡng sai số chấp nhận được
+
+# Tính accuracy
+correct_predictions = np.sum(np.abs(y_test - y_pred) < error_threshold)
+accuracy = (correct_predictions / len(y_test) ) 
+
+print(f'Accuracy (ngưỡng {error_threshold}): {accuracy:.2f}%')
+
 # Vẽ biểu đồ lỗi theo độ sâu
 plot.plot_errors(depth_values[:len(errors)], errors)
 
