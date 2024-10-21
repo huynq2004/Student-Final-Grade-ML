@@ -14,7 +14,7 @@ print(f'Giá trị λ tối ưu (thủ công): {best_lamda}')
 # 3. Lưu trữ mô hình với λ tốt nhất
 
 # Sử dụng numpy để lưu trọng số vào file
-X_train, y_train = utils.load_data_from('D:/Project_ML/Student-Final-Grade-ML/data/split/train_data.csv')
+X_train, y_train = utils.load_data_from('data/split/train_data.csv')
 w = model.ridge_regression(X_train, y_train, best_lamda)
 print('w = ', w)
 np.save('ridge_model_weights.npy', w)
