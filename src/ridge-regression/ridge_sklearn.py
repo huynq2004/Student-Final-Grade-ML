@@ -2,6 +2,7 @@ import numpy as np
 import ridge_model as model
 import ridge_utils as utils
 from sklearn.linear_model import Ridge
+import ridge_plots as plot
 
 # 1. Thiết lập các giá trị λ cần kiểm tra
 lamda_values = np.logspace(-2, 1, num=100)
@@ -27,8 +28,20 @@ print('Trọng số w (sklearn) = ', w_sklearn)
 
 y_pred_sklearn = ridge_model.predict(X_test)
 mse_test_sklearn = np.mean((y_test - y_pred_sklearn) ** 2)
-print(f'Lỗi trung bình trên tập test (sklearn): {mse_test_sklearn}')
+print(f'Lỗi trung bình mse trên tập test (sklearn): {mse_test_sklearn}')
 
+# Đặt ngưỡng sai số cho accuracy
+error_threshold = 0.5  # Ngưỡng sai số chấp nhận được
+
+# Tính accuracy
+correct_predictions = np.sum(np.abs(y_test - y_pred_sklearn) < error_threshold)
+accuracy = (correct_predictions / len(y_test) ) *100
+
+print(f'Accuracy (ngưỡng {error_threshold}): {accuracy:.2f}%')
+
+
+# Vẽ biểu đồ so sánh điểm final dự đoán và thực tế trên tập test
+plot.plot_final_scores_comparison(X_test, y_test, y_pred_sklearn)
 
 
 
