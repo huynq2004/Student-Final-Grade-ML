@@ -12,9 +12,11 @@ best_lamda_sklearn, avg_errors_sklearn = model.train_on_folds_with_sklearn(fold_
 
 print(f'Giá trị λ tốt nhất (sklearn): {best_lamda_sklearn}')
 
+# Lưu giá trị λ tối ưu vào tệp
+np.save('best_lambda_sklearn.npy', best_lamda_sklearn)
 
-X_train, y_train = utils.load_data_from('data/split/train_data.csv')
-X_test, y_test = utils.load_data_from('data/split/test_data.csv')
+X_train, y_train = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/train_data.csv')
+X_test, y_test = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/test_data.csv')
 
 # 6. Sử dụng Ridge Regression từ scikit-learn
 ridge_model = Ridge(alpha=best_lamda_sklearn, fit_intercept=True)
