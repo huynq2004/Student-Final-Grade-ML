@@ -2,7 +2,7 @@ import numpy as np
 import cart_model as model
 import cart_utils as utils
 import cart_plots as plot
-
+import pickle
 # 1. Thiết lập độ sâu cây cần kiểm tra
 depth_values = range(1, 11)
 threshold = 0.01  # Ngưỡng chênh lệch lỗi để dừng sớm
@@ -49,12 +49,21 @@ for depth in depth_values:
 # 3. Lưu trữ mô hình với độ sâu tốt nhất
 print(f'Độ sâu tối ưu (thủ công): {best_depth}')
 
-# 4. Dự đoán trên tập test
+best_tree = model.DecisionTree(max_depth=best_depth)
 X_train, y_train = utils.load_data_from('data/split/train_data.csv')
+best_tree.fit(X_train, y_train)
+
+# Save the best model
+with open('models/cart_model_best_depth.pkl', 'wb') as file:
+    pickle.dump(best_tree, file)
+
+# Load the model and make predictions on the test set
+with open('models/cart_model_best_depth.pkl', 'rb') as file:
+    loaded_tree = pickle.load(file)
+
+# 4. Predict on the test set
 X_test, y_test = utils.load_data_from('data/split/test_data.csv')
-tree = model.DecisionTree(max_depth=best_depth)
-tree.fit(X_train, y_train)
-y_pred = tree.predict(X_test)
+y_pred = loaded_tree.predict(X_test)
 
 # 5. Tính lỗi và vẽ biểu đồ
 mse_test = np.mean((y_test - y_pred) ** 2)
