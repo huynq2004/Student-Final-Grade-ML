@@ -4,12 +4,11 @@ import numpy as np
 import sys
 import pickle
 
- # Thêm đường dẫn vào hệ thống
-sys.path.append('C:/Users/ADMIN/Documents/Final/Student-Final-Grade-ML/src/ridge-regression')
-
-sys.path.append('')
+sys.path.append('src/decision-tree-CART')  # Thêm đường dẫn vào hệ thống
+sys.path.append('src/ridge-regression')
 import cart_model  # Đảm bảo rằng cart_model đã được định nghĩa đúng
 import ridge_model
+
 # Load pre-trained models (adjust paths as necessary)
 with open('models/ridge_model.pkl', 'rb') as f:
     ridge_weights = pickle.load(f)  # Tải trọng số của mô hình Ridge
