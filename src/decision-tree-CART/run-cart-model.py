@@ -8,7 +8,6 @@ import pickle
 depth_values = range(1, 11)
 threshold = 0.01  
 
-# Ngưỡng chênh lệch lỗi để dừng sớm
 
 # 2. Huấn luyện mô hình và tìm độ sâu tối ưu
 errors = []
@@ -45,37 +44,27 @@ for depth in depth_values:
 
 # 3. Lưu trữ mô hình với độ sâu tốt nhất
 print(f'Độ sâu tối ưu (thủ công): {best_depth}')
-
-
-
 best_tree = model.DecisionTree(max_depth=best_depth)
 X_train, y_train = utils.load_data_from('data/split/train_data.csv')
 best_tree.fit(X_train, y_train)
 
-# Save the best model
 with open('models/cart_model_best_depth.pkl', 'wb') as file:
     pickle.dump(best_tree, file)
 
-# Load the model and make predictions on the test set
+
 with open('models/cart_model_best_depth.pkl', 'rb') as file:
     loaded_tree = pickle.load(file)
 
-# 4. Predict on the test set
+# 4. Dự đoán trên tập test
 X_test, y_test = utils.load_data_from('data/split/test_data.csv')
 y_pred = loaded_tree.predict(X_test)
-# 4. Dự đoán trên tập test
-X_train, y_train = utils.load_data_from('data/split/train_data.csv')
-X_test, y_test = utils.load_data_from('data/split/test_data.csv')
-tree = model.DecisionTree(max_depth=best_depth)
-tree.fit(X_train, y_train)
-y_pred = tree.predict(X_test)
 
 # 5. Tính lỗi và vẽ biểu đồ
 mse_test = np.mean((y_test - y_pred) ** 2)
 print(f'Lỗi trung bình trên tập test (thủ công): {mse_test}')
 
 # Đặt ngưỡng sai số cho accuracy
-error_threshold = 0.5  # Ngưỡng sai số chấp nhận được
+error_threshold = 0.5  
 
 # Tính accuracy
 correct_predictions = np.sum(np.abs(y_test - y_pred) < error_threshold)
