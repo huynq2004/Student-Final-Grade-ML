@@ -6,9 +6,8 @@ class DecisionTree:
         self.max_depth = max_depth
         self.tree = None
 
-    # Hàm tính độ lệch Gini hoặc MSE cho bài toán regression
+    # Hàm tính độ lệch MSE cho bài toán regression
     def _calculate_split_error(self, y):
-        # Với bài toán regression, chúng ta có thể dùng Mean Squared Error (MSE)
         return np.mean((y - np.mean(y)) ** 2)
 
     # Hàm tìm split tốt nhất dựa trên các thuộc tính và nhãn
