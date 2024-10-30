@@ -64,6 +64,10 @@ with open('models/cart_model_best_depth.pkl', 'rb') as file:
 # 4. Dự đoán trên tập test
 X_train, y_train = utils.load_data_from('data/split/train_data.csv')
 X_test, y_test = utils.load_data_from('data/split/test_data.csv')
+y_pred = loaded_tree.predict(X_test)
+# 4. Dự đoán trên tập test
+X_train, y_train = utils.load_data_from('data/split/train_data.csv')
+X_test, y_test = utils.load_data_from('data/split/test_data.csv')
 tree = model.DecisionTree(max_depth=best_depth)
 tree.fit(X_train, y_train)
 y_pred = tree.predict(X_test)
