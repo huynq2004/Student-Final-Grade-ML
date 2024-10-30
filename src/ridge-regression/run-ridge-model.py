@@ -1,4 +1,5 @@
 import numpy as np
+import pickle  # Thêm thư viện pickle
 import ridge_model as model
 import ridge_utils as utils
 import ridge_plots as plot
@@ -12,19 +13,22 @@ best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_v
 print(f'Giá trị λ tối ưu (thủ công): {best_lamda}')
 
 # 3. Lưu trữ mô hình với λ tốt nhất
-
-# Sử dụng numpy để lưu trọng số vào file
 X_train, y_train = utils.load_data_from('data/split/train_data.csv')
 w = model.ridge_regression(X_train, y_train, best_lamda)
 print('w = ', w)
-np.save('ridge_model_weights.npy', w)
+
+# Lưu model Ridge vào file pickle
+with open('models/ridge_model.pkl', 'wb') as file:
+    pickle.dump(w, file)
 
 # 4. Dự đoán trên tập test
 # Đọc dữ liệu test
 X_test, y_test = utils.load_data_from('data/split/test_data.csv')
 
-# Dự đoán
-weights = np.load('ridge_model_weights.npy')  # Tải trọng số từ file
+# Tải trọng số từ file pickle và dự đoán
+with open('models/ridge_model.pkl', 'rb') as file:
+    weights = pickle.load(file)
+
 y_pred = model.predict(X_test, weights)
 
 # 5. Tính lỗi và vẽ biểu đồ
@@ -36,10 +40,9 @@ error_threshold = 0.5  # Ngưỡng sai số chấp nhận được
 
 # Tính accuracy
 correct_predictions = np.sum(np.abs(y_test - y_pred) < error_threshold)
-accuracy = (correct_predictions / len(y_test) ) * 100
+accuracy = (correct_predictions / len(y_test)) * 100
 
 print(f'Accuracy (ngưỡng {error_threshold}): {accuracy:.2f}%')
-
 
 # Vẽ biểu đồ lỗi theo các giá trị λ
 plot.plot_errors(lamda_values, avg_errors)
