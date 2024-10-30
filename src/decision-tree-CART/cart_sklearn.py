@@ -44,8 +44,8 @@ print(f'Độ sâu tối ưu (sklearn): {best_depth}')
 
 
 # 4. Dự đoán trên tập test
-X_train, y_train = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/train_data.csv')
-X_test, y_test = utils.load_data_from('C:/Users/ADMIN/Documents/HocMay/Student-Final-Grade-ML/data/split/test_data.csv')
+X_train, y_train = utils.load_data_from('data/split/train_data.csv')
+X_test, y_test = utils.load_data_from('data/split/test_data.csv')
 tree = DecisionTreeRegressor(max_depth=best_depth)
 tree.fit(X_train, y_train)
 y_pred = tree.predict(X_test)
