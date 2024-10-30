@@ -18,7 +18,7 @@ def plot_final_scores_comparison(X_test, y_test, y_pred):
     
     # Vẽ đường thẳng y = x để so sánh
     x = np.linspace(0, 10, 100)
-    plt.plot(x, x, color='red', linestyle='--', label='Giá trị thực')
+    plt.plot(x, x, color='red', linestyle='--', label='Regression Line')
 
     # Giới hạn trục từ 0 đến 10
     plt.xlim(0, 10)

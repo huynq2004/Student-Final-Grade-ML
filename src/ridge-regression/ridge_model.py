@@ -112,4 +112,4 @@ def predict(X, w):
     """
     ones = np.ones((X.shape[0], 1))
     Xbar = np.concatenate((ones, X), axis=1)
-    return np.dot(Xbar, w)
+    return np.dot(Xbar, w).flatten()  # Ensure it returns a 1D array
