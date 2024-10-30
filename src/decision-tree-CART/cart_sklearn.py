@@ -7,6 +7,7 @@ import cart_plots as plot
 depth_values = range(1, 11)
 threshold = 0.01  # Ngưỡng chênh lệch lỗi để dừng
 
+
 # 2. Huấn luyện mô hình và tìm độ sâu tối ưu
 errors = []
 best_depth = None
