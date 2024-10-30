@@ -13,7 +13,7 @@ best_lamda, avg_errors = model.train_on_folds(fold_count=5, lamda_values=lamda_v
 print(f'Giá trị λ tối ưu (thủ công): {best_lamda}')
 
 # 3. Lưu trữ mô hình với λ tốt nhất
-X_train, y_train = utils.load_data_from('data/split/train_data.csv')
+X_train, y_train = utils.load_data_from('C:/Users/ADMIN/Documents/Final/Student-Final-Grade-ML/data/split/train_data.csv')
 w = model.ridge_regression(X_train, y_train, best_lamda)
 print('w = ', w)
 
@@ -23,7 +23,7 @@ with open('models/ridge_model.pkl', 'wb') as file:
 
 # 4. Dự đoán trên tập test
 # Đọc dữ liệu test
-X_test, y_test = utils.load_data_from('data/split/test_data.csv')
+X_test, y_test = utils.load_data_from('C:/Users/ADMIN/Documents/Final/Student-Final-Grade-ML/data/split/test_data.csv')
 
 # Tải trọng số từ file pickle và dự đoán
 with open('models/ridge_model.pkl', 'rb') as file:

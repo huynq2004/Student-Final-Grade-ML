@@ -4,8 +4,8 @@ import pandas as pd
 # Hàm đọc dữ liệu từ file CSV
 def load_fold_data(fold_number):
     """Đọc dữ liệu của một fold từ file CSV."""
-    train_data = pd.read_csv(f'data/split/K-folds2/fold_{fold_number}_train.csv')
-    val_data = pd.read_csv(f'data/split/K-folds2/fold_{fold_number}_val.csv')
+    train_data = pd.read_csv(f'C:/Users/ADMIN/Documents/Final/Student-Final-Grade-ML/data/split/K-folds/fold_{fold_number}_train.csv')
+    val_data = pd.read_csv(f'C:/Users/ADMIN/Documents/Final/Student-Final-Grade-ML/data/split/K-folds/fold_{fold_number}_val.csv')
 
     # Tách biến đầu vào (cw1, mid-term, cw2) và biến đầu ra (final)
     X_train = train_data[['cw1', 'mid-term', 'cw2']].values

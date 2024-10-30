@@ -3,11 +3,11 @@ from tkinter import ttk
 import numpy as np
 import sys
 import pickle
-
-sys.path.append('C:\Users\ADMIN\Documents\Final\Student-Final-Grade-ML\src\decision-tree-CART src/decision-tree-CART')  # Thêm đường dẫn vào hệ thống
-sys.path.append('src/ridge-regression')
 import cart_model  # Đảm bảo rằng cart_model đã được định nghĩa đúng
 import ridge_model
+ # Thêm đường dẫn vào hệ thống
+sys.path.append('C:/Users/ADMIN/Documents/Final/Student-Final-Grade-ML/src/ridge-regression')
+
 
 # Load pre-trained models (adjust paths as necessary)
 with open('models/ridge_model.pkl', 'rb') as f:
